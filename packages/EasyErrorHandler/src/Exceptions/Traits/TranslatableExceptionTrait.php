@@ -9,6 +9,11 @@ use EonX\EasyErrorHandler\Interfaces\Exceptions\TranslatableExceptionInterface;
 trait TranslatableExceptionTrait
 {
     /**
+     * @var null|string
+     */
+    protected $domain = null;
+
+    /**
      * @var mixed[]
      */
     protected $messageParams = [];
@@ -22,6 +27,14 @@ trait TranslatableExceptionTrait
      * @var mixed[]
      */
     protected $userMessageParams = [];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getDomain(): ?string
+    {
+        return $this->domain;
+    }
 
     /**
      * {@inheritdoc}
@@ -45,6 +58,16 @@ trait TranslatableExceptionTrait
     public function getUserMessageParams(): array
     {
         return $this->userMessageParams;
+    }
+
+    /**
+     * Sets the translation domain for Symfony bridge.
+     */
+    public function setDomain(string $domain): self
+    {
+        $this->domain = $domain;
+
+        return $this;
     }
 
     /**
